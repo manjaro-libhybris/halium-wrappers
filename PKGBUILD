@@ -1,8 +1,10 @@
-#Maintainer Erik Inkinen <erik.inkinen@gmail.com>
+# Maintainer: Bardia Moshiri <fakeshell@bardia.tech>
+# Contributor: Erik Inkinen <erik.inkinen@gmail.com>
+
 pkgname=halium-wrappers
 provides=('halium-wrappers')
 _pkgbase=halium-wrappers
-pkgver=13.55bd88f
+pkgver=20.757b005
 pkgrel=1
 arch=('armv7h' 'aarch64' 'x86' 'x86_64')
 url="https://github.com/droidian/halium-wrappers"
@@ -16,6 +18,12 @@ options=(debug !strip)
 pkgver() {
   cd "${srcdir}/${_pkgbase}"
   echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd $pkgbase
+  git checkout -b bookworm
+  git checkout 757b0052797c1855bc96fecafa8f2dfe1352491d
 }
 
 build() {
